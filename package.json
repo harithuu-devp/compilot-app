@@ -3,18 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "npm run seed",
     "dev": "next dev",
+    "prebuild": "npm run seed",
     "build": "next build",
     "start": "next start",
+    "seed": "tsx scripts/seed.ts",
     "lint": "eslint"
   },
   "dependencies": {
     "@heroui/react": "^3.2.5",
     "@heroui/styles": "^3.2.5",
+    "bcryptjs": "^3.0.3",
     "mongoose": "^9.10.1",
     "next": "16.3.5",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "tsx": "^4.23.13"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -27,6 +32,7 @@
     "typescript": "^5"
   },
   "allowScripts": {
-    "unrs-resolver@1.12.2": true
+    "unrs-resolver@1.12.2": true,
+    "esbuild@0.28.2": true
   }
 }

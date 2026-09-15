@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import { loadEnvConfig } from "@next/env";
+
+loadEnvConfig(process.cwd());
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -20,7 +23,7 @@ const cached = globalForMongoose.mongoose ?? {
 
 globalForMongoose.mongoose = cached;
 
-export async function connectToDatabase() {
+export async function connectDB() {
     if (cached.conn) {
         return cached.conn;
     }

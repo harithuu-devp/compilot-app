@@ -2,7 +2,7 @@ import "server-only";
 
 import bcrypt from "bcryptjs";
 import { createHash, randomBytes } from "crypto";
-import { connectToDatabase } from "@/lib/mongodb";
+import { connectDB } from "@/lib/mongodb";
 import Session from "@/models/Session";
 import User from "@/models/User";
 import type { LoggedInUser } from "@/types";
@@ -36,11 +36,11 @@ export async function validateCredentials(
     email: string,
     password: string
 ): Promise<LoggedInUser | null> {
-    await connectToDatabase();
+    await connectDB();
 
     const user = await User.findOne({
         email: email.trim().toLowerCase(),
-    }).select("+passwordHash");
+    }).select("+password");
 
     if (!user) {
         return null;
@@ -48,7 +48,7 @@ export async function validateCredentials(
 
     const validPassword = await verifyPassword(
         password,
-        user.passwordHash
+        user.password
     );
 
     if (!validPassword) {
@@ -64,7 +64,7 @@ export async function validateCredentials(
 }
 
 export async function createSession(userId: string) {
-    await connectToDatabase();
+    await connectDB();
 
     const token = randomBytes(32).toString("base64url");
 
@@ -86,7 +86,7 @@ export async function destroySession(token?: string) {
         return;
     }
 
-    await connectToDatabase();
+    await connectDB();
 
     await Session.deleteOne({
         tokenHash: hashToken(token),
@@ -100,7 +100,7 @@ export async function getUserFromSession(
         return null;
     }
 
-    await connectToDatabase();
+    await connectDB();
 
     const session = await Session.findOne({
         tokenHash: hashToken(token),

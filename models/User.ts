@@ -21,7 +21,7 @@ const userSchema = new Schema(
             trim: true,
         },
 
-        passwordHash: {
+        password: {
             type: String,
             required: true,
             select: false,
