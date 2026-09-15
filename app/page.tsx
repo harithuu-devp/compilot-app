@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { Button } from "@heroui/react";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export default function Home() {
   return (
@@ -62,6 +64,8 @@ export default function Home() {
           >
             Documentation
           </a>
+          <Button>Next Button</Button>
+          <ThemeToggle></ThemeToggle>
         </div>
       </main>
     </div>
