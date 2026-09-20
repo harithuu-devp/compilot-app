@@ -9,6 +9,7 @@
     --line: rgba(100, 116, 139, 0.16);
     --accent: #2563eb;
     --accent-soft: #dbeafe;
+    --bg-base: #f3f1fb
 }
 
 [data-theme="dark"] {
@@ -20,6 +21,7 @@
     --accent-soft: rgba(37, 99, 235, 0.2);
 
     color-scheme: dark;
+    --bg-base: #07090f;
 }
 
 * {
@@ -33,15 +35,37 @@ body {
 
 body {
     margin: 0;
-    background:
+    /* background:
         radial-gradient(
             circle at 5% 0%,
             rgba(59, 130, 246, 0.11),
             transparent 28rem
         ),
         var(--background);
-    color: var(--foreground);
+    color: var(--foreground); */
+    background-color: var(--bg-base);
+    background-image:
+        radial-gradient(1200px 600px at 80% -10%,
+            rgba(124, 92, 255, 0.18), transparent 60%),
+        radial-gradient(1000px 500px at -10% 10%,
+            rgba(40, 216, 255, 0.14), transparent 60%),
+        radial-gradient(900px 600px at 50% 110%,
+            rgba(255, 122, 217, 0.10), transparent 60%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+[data-theme="dark"] body {
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%,
+                    rgba(124, 92, 255, 0.22), transparent 60%),
+    radial-gradient(1000px 500px at -10% 10%,
+                    rgba(40, 216, 255, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 50% 110%,
+                    rgba(255, 122, 217, 0.12), transparent 60%);
 }
 
 button,
