@@ -55,41 +55,39 @@ export async function registerUser(
     };
 }
 
-export async function loginUser(
-    email: string,
-    password: string
-) {
+export async function loginUser(formData: FormData) {
     await connectDB();
 
-    const normalizedEmail =
-        email.trim().toLowerCase();
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    const user =
-        await User.findOne({
-            email: normalizedEmail,
-        });
+    if (
+        typeof email !== "string" ||
+        typeof password !== "string"
+    ) {
+        throw new Error("Email and password are required");
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const user = await User.findOne({
+        email: normalizedEmail,
+    }).select("+password");
 
     if (!user) {
-        throw new Error(
-            "Invalid email or password"
-        );
+        throw new Error("Invalid email or password");
     }
 
-    const passwordValid =
-        await bcrypt.compare(
-            password,
-            user.passwordHash
-        );
+    const passwordValid = await bcrypt.compare(
+        password,
+        user.password
+    );
 
     if (!passwordValid) {
-        throw new Error(
-            "Invalid email or password"
-        );
+        throw new Error("Invalid email or password");
     }
 
-    await createSession(
-        user._id.toString()
-    );
+    await createSession(user._id.toString());
 
     return {
         id: user._id.toString(),

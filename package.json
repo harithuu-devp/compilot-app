@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "predev": "npm run seed",
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "prebuild": "npm run seed",
     "build": "next build",
     "start": "next start",
