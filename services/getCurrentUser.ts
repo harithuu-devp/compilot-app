@@ -15,7 +15,7 @@ export async function getCurrentUser(): Promise<LoggedInUser | null> {
     await connectDB();
 
     const user = await User
-        .findById(session.userId)
+        .findById(session.user_id)
         .lean();
 
     if (!user) {

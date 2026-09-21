@@ -6,7 +6,7 @@ import { createHash, randomBytes } from "crypto";
 import { connectDB } from "@/lib/mongodb";
 import Session from "@/models/Session";
 
-const SESSION_COOKIE = "eventops_session";
+const SESSION_COOKIE = "compilot_session";
 
 const SESSION_DURATION = 7 * 24 * 60 * 60 * 1000;
 
@@ -58,8 +58,8 @@ export async function getSession() {
     const tokenHash = hashToken(token);
 
     const session = await Session.findOne({
-        tokenHash,
-        expiresAt: {
+        token_hash: tokenHash,
+        expires_at: {
             $gt: new Date(),
         },
     }).lean();
@@ -82,7 +82,7 @@ export async function deleteSession() {
         const tokenHash = hashToken(token);
 
         await Session.deleteOne({
-            tokenHash,
+            token_hash: tokenHash,
         });
     }
 

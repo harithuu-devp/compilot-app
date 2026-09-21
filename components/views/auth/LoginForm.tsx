@@ -3,10 +3,7 @@
 import { useActionState } from "react";
 import { login } from "@/app/auth/login/actions";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
-
-type LoginState = {
-    error?: string;
-};
+import type { LoginState } from "@/types";
 
 const initialState: LoginState = {};
 

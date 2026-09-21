@@ -1,5 +1,5 @@
 import { GlassCard } from "@/components/ui/GlassCard";
-import { StatCard } from "@/components/dashboard/StatCard";
+import { StatCard } from "@/components/views/dashboard/StatCard";
 
 const projects = [
   {

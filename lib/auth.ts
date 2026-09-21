@@ -18,6 +18,8 @@ export async function requireAdmin() {
 
     if (user.role !== "admin") {
         redirect("/");
+    }else{
+        redirect("/dashboard");
     }
 
     return user;

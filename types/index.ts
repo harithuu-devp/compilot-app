@@ -6,3 +6,7 @@ export type LoggedInUser = {
     email: string;
     role: UserRole;
 };
+
+export type LoginState = {
+    error?: string;
+};

@@ -55,11 +55,9 @@ export async function registerUser(
     };
 }
 
-export async function loginUser(formData: FormData) {
+export async function loginUser(email: string,
+    password: string) {
     await connectDB();
-
-    const email = formData.get("email");
-    const password = formData.get("password");
 
     if (
         typeof email !== "string" ||
