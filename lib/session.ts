@@ -28,9 +28,9 @@ export async function createSession(userId: string) {
     );
 
     await Session.create({
-        userId,
-        tokenHash,
-        expiresAt,
+        user_id: userId,
+        token_hash: tokenHash,
+        expires_at: expiresAt,
     });
 
     const cookieStore = await cookies();
