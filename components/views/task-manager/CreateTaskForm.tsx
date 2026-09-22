@@ -1,52 +1,65 @@
-"use client"
+"use client";
+import { useState, SubmitEvent } from "react";
+import { createTask } from "@/services/task-manager/actions";
 
-import { useRef, useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button, Input, Label, TextArea } from "@heroui/react"
-import { createTask } from "@/services/task-manager/actions"
+export function CreateTaskForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-export default function CreateTaskForm() {
-  const router = useRouter()
-  const formRef = useRef<HTMLFormElement>(null)
-  const [pending, setPending] = useState(false)
+  async function onSubmit(event: SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setPending(true)
-    const formData = new FormData(e.currentTarget)
-    await createTask(formData)
-    formRef.current?.reset()
-    setPending(false)
-    router.push("/task-manager/tasks")
+    try {
+      const formData = new FormData(event.currentTarget);
+      await createTask(formData);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Something went wrong");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="max-w-md space-y-4">
-      <div className="flex flex-col gap-1">
-        <Label htmlFor="task-title" isRequired>Title</Label>
-        <Input
-          id="task-title"
+    <div>
+      {error && <div style={{ color: "red" }}>{error}</div>}
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
           name="title"
+          placeholder="Task title"
           required
-          placeholder="Enter task title"
-          fullWidth
+          style={{
+            display: "block",
+            border: "1px solid black",
+            padding: "8px",
+            color: "black",
+            backgroundColor: "white",
+          }}
         />
-      </div>
 
-      <div className="flex flex-col gap-1">
-        <Label htmlFor="task-description">Description</Label>
-        <TextArea
-          id="task-description"
+        <textarea
           name="description"
-          rows={3}
-          placeholder="Optional description"
-          fullWidth
+          placeholder="Task description"
+          required
+          style={{
+            display: "block",
+            border: "1px solid black",
+            padding: "8px",
+            color: "black",
+            backgroundColor: "white",
+          }}
         />
-      </div>
 
-      <Button type="submit" variant="primary" fullWidth isPending={pending}>
-        Create Task
-      </Button>
-    </form>
-  )
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Loading..." : "Submit"}
+        </button>
+      </form>
+    </div>
+  );
 }
