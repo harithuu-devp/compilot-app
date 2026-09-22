@@ -16,9 +16,8 @@ const taskSchema = new Schema(
     { timestamps: true },
 );
 
-export type Task =
-    InferSchemaType<typeof taskSchema> & {
-        createdBy: Types.ObjectId
-    };
+export type Task = InferSchemaType<typeof taskSchema>;
+
 const Task = models.Task || model<Task>("Task", taskSchema);
+
 export default Task;

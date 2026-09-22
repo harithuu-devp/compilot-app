@@ -7,6 +7,7 @@ import { useState } from "react";
 const links = [
   { href: "/dashboard", label: "Dashboard", icon: "⌂" },
   { href: "/projects", label: "Projects", icon: "▣" },
+  { href: "/task", label: "Task mgr", icon: "▣" },
 ];
 export function Sidebar() {
   const pathname = usePathname();

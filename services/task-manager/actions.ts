@@ -1,4 +1,5 @@
 "use server"
+import { revalidatePath } from 'next/cache'
 import { connectDB } from "@/lib/mongodb";
 import Task from "@/models/Task";
 
@@ -11,4 +12,10 @@ export async function createTask(formData: FormData){
         title: title,
         description: description
     });
+    revalidatePath('/task')
+}
+
+export async function taskList(){
+    await connectDB()
+    return Task.find();
 }
