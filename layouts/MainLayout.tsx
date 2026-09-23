@@ -17,7 +17,7 @@ export function MainLayout({
     <div className="min-h-dvh">
       <Header user={user} />
 
-      <div className="mx-auto flex max-w-[1600px] items-stretch gap-6 px-3 pb-5 sm:px-6 lg:min-h-[calc(100dvh-6rem)]">
+      <div className="flex w-full items-stretch gap-6 px-3 pb-5 sm:px-6 lg:min-h-[calc(100dvh-6rem)]">
         <Sidebar />
 
         <MainContent>
