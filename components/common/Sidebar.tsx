@@ -14,7 +14,9 @@ export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <aside
-      className={`glass-panel hidden shrink-0 self-start p-3 lg:sticky lg:top-24 lg:block ${collapsed ? "w-20" : "w-60"}`}
+      className={`glass-panel hidden shrink-0 p-3 lg:sticky lg:top-24 lg:block ${
+        collapsed ? "w-20" : "w-60"
+      }`}
     >
       <div className="mb-6 flex items-center justify-between px-2">
         <span

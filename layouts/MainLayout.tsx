@@ -14,15 +14,18 @@ export function MainLayout({
   user: LoggedInUser;
 }) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh">
       <Header user={user} />
-      <div className="mx-auto flex max-w-[1600px] gap-6 px-3 sm:px-6">
+
+      <div className="mx-auto flex max-w-[1600px] items-stretch gap-6 px-3 pb-5 sm:px-6 lg:min-h-[calc(100dvh-6rem)]">
         <Sidebar />
+
         <MainContent>
           {children}
           <Footer />
         </MainContent>
       </div>
+
       <MobileBottomNavbar />
     </div>
   );
