@@ -2,7 +2,7 @@ import { InferSchemaType, Schema, model, models } from "mongoose";
 
 const userSchema = new Schema(
     {
-        schema_version: {
+        schemaVersion: {
             type: Number,
             default: 1
         },

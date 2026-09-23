@@ -8,8 +8,8 @@ import Session from "@/models/Session";
 
 const SESSION_COOKIE = "compilot_session";
 
-// const SESSION_DURATION = 7 * 24 * 60 * 60 * 1000;
-const SESSION_DURATION = 1 * 60 * 1000;
+const SESSION_DURATION = 7 * 24 * 60 * 60 * 1000;
+// const SESSION_DURATION = 1 * 60 * 1000;
 
 function hashToken(token: string) {
     return createHash("sha256")
@@ -27,11 +27,11 @@ export async function createSession(userId: string) {
     const expiresAt = new Date(
         Date.now() + SESSION_DURATION
     );
-
+    console.log("error here");
     await Session.create({
-        user_id: userId,
-        token_hash: tokenHash,
-        expires_at: expiresAt,
+        userId: userId,
+        tokenHash: tokenHash,
+        expiresAt: expiresAt,
     });
 
     const cookieStore = await cookies();
@@ -59,8 +59,8 @@ export async function getSession() {
     const tokenHash = hashToken(token);
 
     const session = await Session.findOne({
-        token_hash: tokenHash,
-        expires_at: {
+        tokenHash: tokenHash,
+        expiresAt: {
             $gt: new Date(),
         },
     }).lean();
@@ -83,7 +83,7 @@ export async function deleteSession() {
         const tokenHash = hashToken(token);
 
         await Session.deleteOne({
-            token_hash: tokenHash,
+            tokenHash: tokenHash,
         });
     }
 

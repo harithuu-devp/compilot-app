@@ -2,20 +2,20 @@ import { InferSchemaType, Schema, Types, model, models } from "mongoose";
 
 const sessionSchema = new Schema(
     {
-        user_id: {
+        userId: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
         },
 
-        token_hash: {
+        tokenHash: {
             type: String,
             required: true,
             unique: true,
             select: false,
         },
 
-        expires_at: {
+        expiresAt: {
             type: Date,
             required: true,
         },
@@ -27,11 +27,11 @@ const sessionSchema = new Schema(
 
 export type Session =
     InferSchemaType<typeof sessionSchema> & {
-        user_id: Types.ObjectId;
+        userId: Types.ObjectId;
     };
 
 sessionSchema.index(
-    { expires_at: 1 },
+    { expiresAt: 1 },
     { expireAfterSeconds: 0 },
 );
 
