@@ -8,7 +8,8 @@ import Session from "@/models/Session";
 
 const SESSION_COOKIE = "compilot_session";
 
-const SESSION_DURATION = 7 * 24 * 60 * 60 * 1000;
+// const SESSION_DURATION = 7 * 24 * 60 * 60 * 1000;
+const SESSION_DURATION = 1 * 60 * 1000;
 
 function hashToken(token: string) {
     return createHash("sha256")
