@@ -68,6 +68,24 @@ export function CreateTaskForm() {
             {error}
           </p>
         )}
+        
+        EXAMPLE PART
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mb-4 md:mr-4">
+            <label>First name</label>
+            <input name="title" className="field" />
+          </div>
+
+          <div className="mb-4 md:mr-4">
+            <label>Last name</label>
+            <input name="description" className="field" />
+          </div>
+
+          <div className="mb-4 md:mr-4">
+            <label>Email</label>
+            <input className="field" />
+          </div>
+        </div>
         <div className="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <button
             className="button-secondary"
@@ -79,23 +97,6 @@ export function CreateTaskForm() {
           <button className="button-primary" type="submit" disabled={isLoading}>
             {isLoading ? <LoadingSpinner label="Creating task" /> : "Save task"}
           </button>
-        </div>
-        EXAMPLE PART
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-          <div className="mb-4 md:mr-4">
-            <label>First name</label>
-            <input className="field" />
-          </div>
-
-          <div className="mb-4">
-            <label>Last name</label>
-            <input className="field" />
-          </div>
-
-          <div className="mb-4">
-            <label>Email</label>
-            <input className="field" />
-          </div>
         </div>
       </form>
     </div>
