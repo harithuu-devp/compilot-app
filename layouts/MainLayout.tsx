@@ -1,31 +1,21 @@
 import type { ReactNode } from "react";
 import { Footer } from "@/components/common/Footer";
 import { Header } from "@/components/common/Header";
-import { MainContent } from "@/components/common/MainContent";
 import { MobileBottomNavbar } from "@/components/common/MobileBottomNavbar";
 import { Sidebar } from "@/components/common/Sidebar";
 import type { LoggedInUser } from "@/types";
 
-export function MainLayout({
-  children,
-  user,
-}: {
-  children: ReactNode;
-  user: LoggedInUser;
-}) {
+export function MainLayout({ children, user }: { children: ReactNode; user: LoggedInUser }) {
   return (
-    <div className="min-h-dvh">
+    <div className="relative min-h-dvh overflow-hidden bg-[var(--bg-base)]">
       <Header user={user} />
-
-      <div className="flex w-full items-stretch gap-6 px-3 pb-5 sm:px-6 lg:min-h-[calc(100dvh-6rem)]">
+      <div className="flex items-start gap-6 px-5 pb-24 pt-24 sm:px-6 lg:pb-6">
         <Sidebar />
-
-        <MainContent>
-          {children}
+        <div className="min-w-0 flex-1">
+          <main className="glass-panel min-h-[calc(100dvh-7.5rem)] p-5 sm:p-6 lg:p-8">{children}</main>
           <Footer />
-        </MainContent>
+        </div>
       </div>
-
       <MobileBottomNavbar />
     </div>
   );
