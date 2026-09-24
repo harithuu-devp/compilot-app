@@ -16,7 +16,7 @@ export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <aside className={`sticky top-24 h-[calc(100dvh-96px-24px)] w-full overflow-hidden p-3 transition-[max-width] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${collapsed ? "sidebar-collapsed max-w-24" : "max-w-72"} glass-panel grid grid-rows-[auto_auto_1fr]`}>
+    <aside className={`glass-panel sticky top-0 hidden h-[calc(100dvh-7.5rem)] w-72 shrink-0 self-start grid-rows-[auto_auto_1fr] overflow-hidden p-3 transition-[max-width] duration-500 ease-[cubic-bezier(.22,1,.36,1)] lg:grid ${collapsed ? "sidebar-collapsed max-w-24" : "max-w-72"}`}>
       <div className="mb-5 grid grid-cols-[1fr_auto] gap-2">
         <span className={`overflow-hidden whitespace-nowrap text-xs font-semibold uppercase tracking-[.16em] text-[var(--muted)] transition-all duration-300 ${collapsed ? "invisible w-0" : "visible w-28"}`}>Workspace</span>
         <button className="icon-button h-10 w-10 shrink-0" onClick={() => setCollapsed(!collapsed)} aria-label="Toggle sidebar">

@@ -4,8 +4,12 @@
 
 :root {
   --background: #f5f7fb;
-  --foreground: #172033;
-  --muted: #64718a;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-placeholder: #94a3b8;
+  --foreground: var(--text-primary);
+  --muted: var(--text-muted);
   --line: rgba(100, 116, 139, 0.18);
   --accent: #3b82f6;
   --accent-secondary: #7c3aed;
@@ -14,20 +18,24 @@
   --accent-pink: #ec4899;
   --accent-soft: rgba(37, 99, 235, 0.12);
   --bg-base: #f5f7fb;
-  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-bg: rgba(241, 245, 249, 0.9);
   --glass-fill: var(--glass-bg);
   --glass-fill-strong: var(--glass-bg);
-  --glass-border: rgba(255, 255, 255, 0.9);
-  --glass-highlight: rgba(255, 255, 255, 0.88);
-  --glass-shadow: rgba(30, 41, 59, 0.12);
-  --field-fill: rgba(255, 255, 255, 0.64);
-  --glass-blur: 24px;
+  --glass-border: rgba(148, 163, 184, 0.24);
+  --glass-highlight: rgba(255, 255, 255, 0.52);
+  --glass-shadow: rgba(15, 23, 42, 0.1);
+  --field-fill: rgba(255, 255, 255, 0.82);
+  --glass-blur: 30px;
 }
 
 [data-theme="dark"] {
   --background: #070b14;
-  --foreground: #f1f5f9;
-  --muted: #94a3b8;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-placeholder: #64748b;
+  --foreground: var(--text-primary);
+  --muted: var(--text-muted);
   --line: rgba(255, 255, 255, 0.08);
   --accent: #60a5fa;
   --accent-secondary: #8b5cf6;
@@ -120,7 +128,7 @@ button:disabled { cursor: not-allowed; opacity: 0.68; }
 }
 
 textarea.field { min-height: 160px; }
-.field::placeholder { color: var(--muted); opacity: 0.75; }
+.field::placeholder { color: var(--text-placeholder); }
 .field:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 
 .glass-button, .button-primary, .button-secondary {
