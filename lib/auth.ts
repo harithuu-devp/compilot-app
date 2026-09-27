@@ -1,0 +1,26 @@
+import "server-only";
+
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/services/getCurrentUser";
+
+export async function requireUser() {
+    const user = await getCurrentUser();
+
+    if (!user) {
+        redirect("/auth/login");
+    }
+
+    return user;
+}
+
+export async function requireAdmin() {
+    const user = await requireUser();
+
+    if (user.role !== "admin") {
+        redirect("/");
+    }else{
+        redirect("/dashboard");
+    }
+
+    return user;
+}

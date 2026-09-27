@@ -1,0 +1,270 @@
+/* GlassDash reusable utility classes. All colors come from CSS variables. */
+
+@layer utilities {
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--ambient-shadow);
+    backdrop-filter: blur(24px) saturate(160%);
+  }
+
+  .glass-panel {
+    background-image: var(--gradient-surface);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--ambient-shadow);
+    backdrop-filter: blur(28px) saturate(170%);
+  }
+
+  .glass-sidebar {
+    background: var(--chrome-surface);
+    border-right: 1px solid var(--glass-border);
+    backdrop-filter: blur(44px) saturate(185%);
+  }
+
+  /* Heavier frosted chrome for the fixed header, sidebar and mobile navbar so
+     scrolling content stays a barely visible blur behind them. */
+  .glass-chrome {
+    background: var(--chrome-surface);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--ambient-shadow);
+    backdrop-filter: blur(44px) saturate(185%);
+  }
+
+  .glass-input {
+    background: var(--field-background);
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+    backdrop-filter: blur(18px);
+    transition: border-color 250ms ease-out, box-shadow 250ms ease-out, background-color 250ms ease-out;
+  }
+
+  .glass-input::placeholder {
+    color: var(--muted);
+  }
+
+  .glass-input:hover {
+    border-color: var(--glass-border-strong);
+  }
+
+  .glass-input:focus,
+  .glass-input:focus-visible,
+  .glass-input[data-focus-visible="true"],
+  .glass-input:focus-within {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22), var(--glow-cyan);
+  }
+
+  .glass-button {
+    background-image: var(--gradient-primary);
+    color: #f8fafc;
+    border: 1px solid transparent;
+    box-shadow: var(--ambient-shadow), var(--glow-blue);
+    transition: transform 250ms ease-out, box-shadow 250ms ease-out, opacity 250ms ease-out;
+  }
+
+  .glass-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ambient-shadow), var(--glow-violet);
+  }
+
+  .glass-border {
+    border: 1px solid var(--glass-border);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-secondary {
+    background-image: var(--gradient-secondary);
+  }
+
+  .bg-gradient-surface {
+    background-image: var(--gradient-surface);
+  }
+
+  .bg-gradient-success {
+    background-image: var(--gradient-success);
+  }
+
+  .bg-gradient-warning {
+    background-image: var(--gradient-warning);
+  }
+
+  .bg-gradient-danger {
+    background-image: var(--gradient-danger);
+  }
+
+  .bg-gradient-info {
+    background-image: var(--gradient-info);
+  }
+
+  .bg-gradient-lavender {
+    background-image: var(--gradient-lavender);
+  }
+
+  /* Aurora background - pseudo-elements only, transform animation only. */
+  .aurora-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background-color: var(--bg);
+    background-image: var(--body-gradient);
+    background-attachment: fixed;
+  }
+
+  .aurora-bg > span {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .aurora-bg > span::before,
+  .aurora-bg > span::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(180px);
+    will-change: transform;
+  }
+
+  /* 1. Top-left electric blue */
+  .aurora-bg__top::before {
+    top: -14%;
+    left: -10%;
+    width: 55vw;
+    height: 55vw;
+    max-width: 760px;
+    max-height: 760px;
+    opacity: 0.32;
+    background: radial-gradient(circle at center, var(--aurora-blue), transparent 68%);
+    animation: aurora-drift 28s ease-out infinite;
+  }
+
+  /* 2. Top-right indigo */
+  .aurora-bg__top::after {
+    top: -18%;
+    right: -12%;
+    width: 52vw;
+    height: 52vw;
+    max-width: 720px;
+    max-height: 720px;
+    opacity: 0.3;
+    background: radial-gradient(circle at center, var(--aurora-indigo), transparent 68%);
+    animation: aurora-drift-alt 30s ease-out infinite;
+  }
+
+  /* 3. Center lavender */
+  .aurora-bg__mid::before {
+    top: 26%;
+    left: 28%;
+    width: 46vw;
+    height: 46vw;
+    max-width: 640px;
+    max-height: 640px;
+    opacity: 0.22;
+    background: radial-gradient(circle at center, var(--aurora-lavender), transparent 70%);
+    filter: blur(150px);
+    animation: aurora-drift 26s ease-out infinite;
+  }
+
+  /* 4. Bottom-left turquoise */
+  .aurora-bg__mid::after {
+    bottom: -16%;
+    left: -8%;
+    width: 48vw;
+    height: 48vw;
+    max-width: 660px;
+    max-height: 660px;
+    opacity: 0.24;
+    background: radial-gradient(circle at center, var(--aurora-turquoise), transparent 68%);
+    animation: aurora-drift-alt 29s ease-out infinite;
+  }
+
+  /* 5. Bottom-right violet */
+  .aurora-bg__bottom::before {
+    bottom: -22%;
+    right: -10%;
+    width: 54vw;
+    height: 54vw;
+    max-width: 740px;
+    max-height: 740px;
+    opacity: 0.28;
+    background: radial-gradient(circle at center, var(--aurora-violet), transparent 68%);
+    animation: aurora-drift 27s ease-out infinite;
+  }
+
+  /* 6. Noise texture overlay */
+  .aurora-bg__bottom::after {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: var(--noise-opacity);
+    border-radius: 0;
+    filter: none;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px),
+      radial-gradient(rgba(15, 23, 42, 0.35) 0.5px, transparent 0.5px);
+    background-size: 3px 3px, 4px 4px;
+    background-position: 0 0, 1px 1px;
+  }
+
+  .text-gradient {
+    background-image: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .glow-blue {
+    box-shadow: var(--glow-blue);
+  }
+
+  .glow-violet {
+    box-shadow: var(--glow-violet);
+  }
+
+  .glow-cyan {
+    box-shadow: var(--glow-cyan);
+  }
+
+  .glass-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) transparent;
+  }
+
+  .glass-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .glass-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .glass-scrollbar::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--muted) 45%, transparent);
+    border-radius: 9999px;
+  }
+
+  .transition-glass {
+    transition: transform 300ms ease-out, background-color 300ms ease-out, border-color 300ms ease-out,
+      box-shadow 300ms ease-out, color 300ms ease-out;
+  }
+
+  .glass-hover:hover {
+    transform: translateY(-2px);
+    background: var(--surface-hover);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--ambient-shadow), var(--glow-blue);
+  }
+}
+
+/* Popover surfaces float above content - keep them readable and blurred. */
+.popover,
+.menu,
+.select__popover,
+.autocomplete__popover {
+  backdrop-filter: blur(26px) saturate(170%);
+}

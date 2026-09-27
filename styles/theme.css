@@ -1,0 +1,180 @@
+/* GlassDash Design Tokens
+ * Single source of truth for color, gradient and shadow tokens.
+ * Theme switching only swaps these variables; components never redefine colors.
+ */
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-glass-border: var(--glass-border);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-lavender: var(--lavender);
+  --color-cyan: var(--cyan);
+  --color-turquoise: var(--turquoise);
+  --color-info: var(--info);
+
+  --radius-glass: 24px;
+  --radius-pill: 9999px;
+}
+
+/* ---------------------------------------------------------------- Light */
+:root {
+  --bg: #f8fbff;
+  --surface: rgba(255, 255, 255, 0.65);
+  --surface-hover: rgba(255, 255, 255, 0.82);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --glass-border-strong: rgba(37, 99, 235, 0.28);
+  /* Frosted surface shared by the header, sidebar and mobile navbar. */
+  --chrome-surface: rgba(255, 255, 255, 0.42);
+  --body-gradient:
+    radial-gradient(1200px 820px at 6% -12%, rgba(37, 99, 235, 0.3), transparent 60%),
+    radial-gradient(1020px 720px at 94% -8%, rgba(79, 70, 229, 0.28), transparent 62%),
+    radial-gradient(980px 720px at 50% 112%, rgba(79, 70, 229, 0.2), transparent 65%),
+    linear-gradient(180deg, #ffffff 0%, #f4f7ff 46%, #eef1ff 100%);
+
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --muted: #64748b;
+
+  --primary: #2563eb;
+  --secondary: #4f46e5;
+  --accent: #4f46e5;
+  --violet: #7c3aed;
+  --lavender: #a855f7;
+  --cyan: #22d3ee;
+  --turquoise: #06b6d4;
+
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #0ea5e9;
+
+  --gradient-primary: linear-gradient(135deg, #2563eb, #7c3aed, #22d3ee);
+  --gradient-secondary: linear-gradient(135deg, #4f46e5, #8b5cf6);
+  --gradient-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.38));
+  --gradient-success: linear-gradient(135deg, #10b981, #22d3ee);
+  --gradient-warning: linear-gradient(135deg, #f59e0b, #fb923c);
+  --gradient-danger: linear-gradient(135deg, #ef4444, #f43f5e);
+  --gradient-info: linear-gradient(135deg, #0ea5e9, #22d3ee);
+  --gradient-lavender: linear-gradient(135deg, #a855f7, #6366f1);
+
+  --ambient-shadow: 0 12px 40px rgba(37, 99, 235, 0.08);
+  --glow-blue: 0 0 35px rgba(59, 130, 246, 0.2);
+  --glow-violet: 0 0 35px rgba(124, 58, 237, 0.18);
+  --glow-cyan: 0 0 35px rgba(34, 211, 238, 0.15);
+
+  --aurora-blue: rgba(37, 99, 235, 0.28);
+  --aurora-indigo: rgba(79, 70, 229, 0.24);
+  --aurora-lavender: rgba(168, 85, 247, 0.26);
+  --aurora-turquoise: rgba(6, 182, 212, 0.24);
+  --aurora-violet: rgba(124, 58, 237, 0.28);
+  --noise-opacity: 0.16;
+
+  /* HeroUI bridge - keeps vendor components on the GlassDash palette */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --surface-foreground: var(--text);
+  --surface-secondary: rgba(255, 255, 255, 0.55);
+  --surface-tertiary: rgba(255, 255, 255, 0.75);
+  --overlay: rgba(255, 255, 255, 0.92);
+  --overlay-foreground: var(--text);
+  --border: var(--glass-border);
+  --separator: var(--glass-border);
+  --field-background: rgba(255, 255, 255, 0.6);
+  --field-foreground: var(--text);
+  --field-placeholder: var(--muted);
+  --field-border: var(--glass-border);
+  --radius: 0.75rem;
+  --field-radius: 1rem;
+  --focus: var(--primary);
+  --link: var(--primary);
+}
+
+/* ----------------------------------------------------------------- Dark */
+.dark {
+  color-scheme: dark;
+
+  --bg: #07111f;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --surface-strong: rgba(13, 24, 41, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(34, 211, 238, 0.3);
+  --chrome-surface: rgba(9, 17, 30, 0.52);
+  --body-gradient:
+    radial-gradient(1200px 820px at 6% -12%, rgba(37, 99, 235, 0.42), transparent 60%),
+    radial-gradient(1020px 720px at 94% -8%, rgba(79, 70, 229, 0.4), transparent 62%),
+    radial-gradient(980px 720px at 50% 112%, rgba(37, 99, 235, 0.3), transparent 65%),
+    linear-gradient(180deg, #050b16 0%, #07111f 46%, #0a1024 100%);
+
+  --text: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --muted: #94a3b8;
+
+  --gradient-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+
+  --ambient-shadow: 0 12px 48px rgba(0, 0, 0, 0.32);
+  --aurora-blue: rgba(37, 99, 235, 0.34);
+  --aurora-indigo: rgba(79, 70, 229, 0.3);
+  --aurora-lavender: rgba(168, 85, 247, 0.3);
+  --aurora-turquoise: rgba(6, 182, 212, 0.26);
+  --aurora-violet: rgba(124, 58, 237, 0.34);
+  --noise-opacity: 0.22;
+
+  --surface-secondary: rgba(255, 255, 255, 0.06);
+  --surface-tertiary: rgba(255, 255, 255, 0.1);
+  --overlay: rgba(9, 19, 33, 0.94);
+  --background: var(--bg);
+  --foreground: var(--text);
+  --surface-foreground: var(--text);
+  --field-background: rgba(255, 255, 255, 0.05);
+  --field-foreground: var(--text);
+}
+
+/* System preference fallback - applied only until the cookie theme class lands. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+
+    --bg: #07111f;
+    --surface: rgba(255, 255, 255, 0.05);
+    --surface-hover: rgba(255, 255, 255, 0.08);
+    --surface-strong: rgba(13, 24, 41, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-border-strong: rgba(34, 211, 238, 0.3);
+    --chrome-surface: rgba(9, 17, 30, 0.52);
+    --body-gradient:
+      radial-gradient(1200px 820px at 6% -12%, rgba(37, 99, 235, 0.42), transparent 60%),
+      radial-gradient(1020px 720px at 94% -8%, rgba(79, 70, 229, 0.4), transparent 62%),
+      radial-gradient(980px 720px at 50% 112%, rgba(37, 99, 235, 0.3), transparent 65%),
+      linear-gradient(180deg, #050b16 0%, #07111f 46%, #0a1024 100%);
+
+    --text: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --muted: #94a3b8;
+
+    --gradient-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+
+    --ambient-shadow: 0 12px 48px rgba(0, 0, 0, 0.32);
+    --aurora-blue: rgba(37, 99, 235, 0.34);
+    --aurora-indigo: rgba(79, 70, 229, 0.3);
+    --aurora-lavender: rgba(168, 85, 247, 0.3);
+    --aurora-turquoise: rgba(6, 182, 212, 0.26);
+    --aurora-violet: rgba(124, 58, 237, 0.34);
+    --noise-opacity: 0.22;
+
+    --surface-secondary: rgba(255, 255, 255, 0.06);
+    --surface-tertiary: rgba(255, 255, 255, 0.1);
+    --overlay: rgba(9, 19, 33, 0.94);
+    --background: var(--bg);
+    --foreground: var(--text);
+    --surface-foreground: var(--text);
+    --field-background: rgba(255, 255, 255, 0.05);
+    --field-foreground: var(--text);
+  }
+}
