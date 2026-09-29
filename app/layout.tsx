@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import {Inter} from "next/font/google"
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import "./globals.css";
 
@@ -8,6 +9,12 @@ export const metadata: Metadata = {
   description: "Compilot",
 };
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 export default async function RootLayout({
   children,
 }: LayoutProps<"/">) {
@@ -15,7 +22,7 @@ export default async function RootLayout({
   const theme = cookieStore.get("compilot-theme")?.value ?? "light";
 
   return (
-    <html lang="en" data-theme={theme} suppressHydrationWarning>
+    <html lang="en" data-theme={theme} className={inter.variable} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
