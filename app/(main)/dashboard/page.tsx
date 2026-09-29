@@ -30,6 +30,7 @@ import {
 } from "@/lib/constants";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { cn } from "cn";
+import { requireUser } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -56,7 +57,8 @@ function SectionHeading({ title, description, action }: { title: string; descrip
   );
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const user = await requireUser();
   const peak = Math.max(...TRAFFIC_SERIES.map((point) => point.value));
 
   return (
@@ -65,7 +67,7 @@ export default function DashboardPage() {
         <div>
           <GlassBadge variant="info">Live workspace</GlassBadge>
           <h1 className="mt-4 text-3xl font-semibold tracking-tight text-[var(--text)]">
-            Welcome back, Ava
+            Welcome back, {user.name}
           </h1>
           <p className="mt-2 text-sm text-[var(--text-secondary)]">
             {APP_NAME} summary for the last 7 days · {formatDate(new Date())}

@@ -7,7 +7,7 @@ export async function requireUser() {
     const user = await getCurrentUser();
 
     if (!user) {
-        redirect("/auth/login");
+        redirect("/login");
     }
 
     return user;
@@ -21,6 +21,5 @@ export async function requireAdmin() {
     }else{
         redirect("/dashboard");
     }
-
     return user;
 }
