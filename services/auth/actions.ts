@@ -5,48 +5,36 @@ import { redirect } from "next/navigation";
 import type { LoginFormState } from "@/types/index";
 import User from "@/models/User";
 import { createSession } from "@/lib/session";
+import { validateLogin } from "@/validations/validateLogin";
 
 export async function signIn(
   _state: LoginFormState,
   formData: FormData
 ): Promise<LoginFormState> {
-  const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  const password = String(formData.get("password") ?? "");
+  const result = validateLogin.safeParse({
+    email: String(formData.get("email") ?? "").trim().toLowerCase(),
+    password: String(formData.get("password") ?? ""),
+  });
 
-  if (!email) {
+  if (!result.success) {
+    const issue = result.error.issues[0];
     return {
       status: "error",
-      message: "Email is required.",
-      field: "email",
-    };
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return {
-      status: "error",
-      message: "Enter a valid email address.",
-      field: "email",
-    };
-  }
-
-  if (password.length < 8) {
-    return {
-      status: "error",
-      message: "Password must be at least 8 characters.",
-      field: "password",
+      message: issue.message,
+      field: issue.path[0] as "email" | "password",
     };
   }
 
   const user = await User.findOne({
-    email: email,
+    email: result.data.email
   }).select("+password");
 
   if (!user) {
     throw new Error("Invalid email or password");
-  }
+  }   
 
   const passwordValid = await bcrypt.compare(
-    password,
+    result.data.password,
     user.password
   );
 
